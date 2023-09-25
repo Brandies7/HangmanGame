@@ -32,4 +32,39 @@ function displayWord() {
     }
 }
 
+function updateWrongLettersEl() {
+
+}
+
+function showNotification() {
+    notification.classList.add('show');
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 2000)
+}
+
+window.addEventListener('keydown', e => {
+    if(e.code >= 'KeyA' && e.code <= 'KeyZ') {
+        const letter = e.key;
+        if(selectedWord.includes(letter)) {
+            if(!correctLetters.includes(letter)) {
+                correctLetters.push(letter);
+                displayWord();
+            }
+            else {
+                showNotification();
+            }
+        }
+        else {
+            if(!wrongLetters.includes(letter)) {
+                wrongLetters.push(letter);
+                updateWrongLettersEl();
+            }
+            else {
+                showNotification();
+            }
+        }
+    }
+})
+
 displayWord();
